@@ -9,5 +9,7 @@ namespace BaltaTodo.Domain.Interfaces
     {
         void Create(TodoItem model);
         void Update(TodoItem model);
+
+        TodoItem GetById(Guid id, string user);
     }
 }
