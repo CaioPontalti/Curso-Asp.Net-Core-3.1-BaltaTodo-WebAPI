@@ -6,6 +6,7 @@ using BaltaTodo.Domain.Handlers;
 using BaltaTodo.Domain.Interfaces;
 using BaltaTodo.Infra.Context;
 using BaltaTodo.Infra.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BaltaTodo.API
 {
@@ -39,6 +41,21 @@ namespace BaltaTodo.API
 
             services.AddTransient<ITodoRepository, TodoRepository>();
             services.AddTransient<TodoHandler, TodoHandler>();
+
+            services
+               .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddJwtBearer(options =>
+               {
+                   options.Authority = "https://securetoken.google.com/todo-b1f1d";
+                   options.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuer = true,
+                       ValidIssuer = "https://securetoken.google.com/todo-b1f1d",
+                       ValidateAudience = true,
+                       ValidAudience = "todo-b1f1d",
+                       ValidateLifetime = true
+                   };
+               });
         }
 
 

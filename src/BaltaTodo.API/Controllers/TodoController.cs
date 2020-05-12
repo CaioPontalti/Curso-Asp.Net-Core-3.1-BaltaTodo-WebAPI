@@ -9,6 +9,7 @@ using BaltaTodo.Domain.Entities;
 using BaltaTodo.Domain.Handlers;
 using BaltaTodo.Domain.Interfaces;
 using BaltaTodo.Infra.Context;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
@@ -30,9 +31,11 @@ namespace BaltaTodo.Api.Controllers
 
         [HttpGet]
         [Route("")]
+        [Authorize]
         public IEnumerable<TodoItem> GetAll()
         {
-            var result = _todoRepository.GetAll("");
+            var user = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
+            var result = _todoRepository.GetAll(user);
 
             return result;
         }
