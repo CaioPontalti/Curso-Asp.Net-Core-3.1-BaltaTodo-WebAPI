@@ -10,12 +10,10 @@ namespace BaltaTodo.Tests.Repositories
     {
         public void Create(TodoItem model)
         {
-            
         }
         
         public void Update(TodoItem model)
         {
-            
         }
 
         public TodoItem GetById(Guid id, string user)
@@ -23,5 +21,24 @@ namespace BaltaTodo.Tests.Repositories
             return new TodoItem("Descrição do Titulo", DateTime.Now, "Usuario");
         }
 
+        public IEnumerable<TodoItem> GetAll(string user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<TodoItem> GetAllDone(string user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<TodoItem> GetAllUndone(string user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<TodoItem> GetByPeriod(string user, DateTime date, bool done)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

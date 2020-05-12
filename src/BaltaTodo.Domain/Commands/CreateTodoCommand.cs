@@ -10,7 +10,11 @@ namespace BaltaTodo.Domain.Commands
 {
     public class CreateTodoCommand : Notifiable,  ICommand
     {
-        
+        public CreateTodoCommand()
+        {
+
+        }
+
         public CreateTodoCommand(string title, DateTime data, string user)
         {
             Title = title;

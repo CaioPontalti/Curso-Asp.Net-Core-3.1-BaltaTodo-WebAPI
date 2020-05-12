@@ -23,6 +23,12 @@ namespace BaltaTodo.Domain.Queries
             return t => t.User == user && t.Done == false;
         }
 
+        public static Expression<Func<TodoItem, bool>> GetById(Guid id, string user)
+        {
+            return t => t.Id == id &&
+                        t.User == user;
+        }
+
         public static Expression<Func<TodoItem, bool>> GetByPeriod(string user, DateTime date, bool done)
         {
             return t => t.User == user &&
